@@ -23,7 +23,7 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     @Override
     public boolean add(T element) {
        try {
-           if (this.size >= this.elements.length) {
+           if (this.size == this.elements.length) {
                resize();
            }
            elements[this.size++] = element;
@@ -41,7 +41,7 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        return (T) elements[index];
     }
 
     @Override
@@ -51,7 +51,14 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     @Override
     public int size() {
-        return this.size;
+        int result =0;
+
+        for(int i=0;i<elements.length;i++){
+            if(elements[i] !=null){
+                result++;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -67,7 +74,7 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     private void resize(){
         int newCapacity = this.size*2;
         Object[] newArray = new Object[newCapacity];
-        for(int i=0;i<newCapacity;i++){
+        for(int i=0;i< elements.length;i++){
             newArray[i] = elements[i];
         }
         elements = newArray;
