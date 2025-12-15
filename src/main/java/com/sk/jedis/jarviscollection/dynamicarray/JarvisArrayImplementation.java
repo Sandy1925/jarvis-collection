@@ -26,7 +26,7 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
            if (this.size == this.elements.length) {
                resize();
            }
-           elements[this.size++] = element;
+           elements[size()] = element;
            grow();
        }catch(Exception ex){
            return false;
