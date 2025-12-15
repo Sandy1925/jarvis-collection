@@ -1,5 +1,7 @@
 package com.sk.jedis.jarviscollection.dynamicarray;
 
+import com.sk.jedis.jarviscollection.dynamicarray.exceptions.InvalidSizeException;
+
 public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     private Object[] elements;
@@ -11,6 +13,9 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     }
 
     public JarvisArrayImplementation(int initialCapacity){
+        if(initialCapacity<=0){
+            throw new InvalidSizeException("Initial Capacity can't be zero");
+        }
         this.size =initialCapacity;
         this.elements = new Object[initialCapacity];
     }
