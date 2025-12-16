@@ -9,7 +9,7 @@ class JarvisArrayImplementationTest {
 
     @Test
     void add() {
-        JarvisArray arr = new JarvisArrayImplementation();
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
         boolean added = arr.add(1);
         assertTrue(added);
         assertEquals(1,arr.size());
@@ -22,5 +22,16 @@ class JarvisArrayImplementationTest {
         assertThrows(InvalidSizeException.class,()->{
             JarvisArray<Integer> arr = new JarvisArrayImplementation<>(0);
         });
+    }
+
+    @Test
+    public void isEmptyCheck(){
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
+        boolean isEmpty = arr.isEmpty();
+        assertTrue(isEmpty);
+        arr.add(12);
+        arr.add(1,23);
+        assertFalse(arr.isEmpty());
+        assertEquals(2,arr.size());
     }
 }

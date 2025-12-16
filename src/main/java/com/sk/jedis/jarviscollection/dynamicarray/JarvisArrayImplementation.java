@@ -36,7 +36,15 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     @Override
     public boolean add(int index, T element) {
-        return false;
+        if(index>= this.size){
+            throw new InvalidSizeException("Index out of bound");
+        }
+        try{
+            elements[index] = element;
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -46,7 +54,16 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     @Override
     public boolean set(int index, T element) {
-        return false;
+
+        if(index>= this.size){
+            throw new InvalidSizeException("Index out of bound");
+        }
+        try{
+            elements[index] = element;
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -63,12 +80,15 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     @Override
     public void remove(int index) {
-
+        if(index>= this.size){
+            throw new InvalidSizeException("Index out of bound");
+        }
+        elements[index] = null;
     }
 
     @Override
     public boolean isEmpty() {
-        return elements.length ==0;
+        return size() ==0;
     }
 
     private void resize(){
