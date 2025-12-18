@@ -34,4 +34,36 @@ class JarvisArrayImplementationTest {
         assertFalse(arr.isEmpty());
         assertEquals(2,arr.size());
     }
+    @Test
+    public void getterCheck(){
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
+        arr.add(12);
+        assertEquals(12, arr.get(0));
+    }
+    @Test
+    public void settercheck(){
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
+        arr.add(12);
+        assertEquals(12, arr.get(0));
+        arr.set(0,20);
+        assertEquals(20, arr.get(0));
+    }
+
+    @Test
+    public void addArIndex(){
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
+        arr.add(12);
+        assertEquals(12, arr.get(0));
+        arr.add(12,20);
+        assertEquals(20, arr.get(12));
+    }
+
+    @Test
+    public void loadTest(){
+        JarvisArray<Integer> arr = new JarvisArrayImplementation<>();
+        for(int i=0;i<100;i++){
+            arr.add(i);
+        }
+        assertEquals(100,arr.size());
+    }
 }

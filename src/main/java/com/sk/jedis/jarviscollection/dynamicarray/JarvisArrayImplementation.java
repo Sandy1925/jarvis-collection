@@ -2,10 +2,13 @@ package com.sk.jedis.jarviscollection.dynamicarray;
 
 import com.sk.jedis.jarviscollection.dynamicarray.exceptions.InvalidSizeException;
 
+import java.util.logging.Logger;
+
 public class JarvisArrayImplementation<T> implements JarvisArray<T> {
 
     private Object[] elements;
     private int size;
+    private Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public JarvisArrayImplementation(){
         this.size =10;
@@ -23,11 +26,11 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     @Override
     public boolean add(T element) {
        try {
-           if (this.size == this.elements.length) {
+           if (this.size == size()) {
                resize();
            }
            elements[size()] = element;
-           grow();
+           this.size= elements.length;
        }catch(Exception ex){
            return false;
        }
@@ -37,10 +40,11 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     @Override
     public boolean add(int index, T element) {
         if(index>= this.size){
-            throw new InvalidSizeException("Index out of bound");
+            resize();
         }
         try{
             elements[index] = element;
+            this.size= elements.length;
         }catch(Exception e){
             return false;
         }
@@ -94,13 +98,10 @@ public class JarvisArrayImplementation<T> implements JarvisArray<T> {
     private void resize(){
         int newCapacity = this.size*2;
         Object[] newArray = new Object[newCapacity];
-        for(int i=0;i< elements.length;i++){
+        for(int i=0;i< size();i++){
             newArray[i] = elements[i];
         }
         elements = newArray;
     }
 
-    private int grow(){
-        return this.size*2;
-    }
 }
